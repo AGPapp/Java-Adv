@@ -18,9 +18,9 @@ public class main { public static void main(String[] args) {
         for (Sweets s: sweets) {
             sumPrice+=s.getPrice();
             sumWeight+=s.getWeight();
-            System.out.println(s.toString());
+            System.out.println(s);
         }
-        System.out.println("Общая стоимость подарка = " + sumPrice);
-        System.out.println("Общий вес подарка = " + sumWeight);
+        System.out.println("Общая стоимость подарка = " + sumPrice + " стишков");
+        System.out.println("Общий вес подарка = " + sumWeight + " гномиков");
     }
 }
