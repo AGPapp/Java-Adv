@@ -1,14 +1,27 @@
 package NewCalc;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Введите первое число: ");
-        double x = in.nextDouble();
+        double x=0;
+        try {
+            x = in.nextDouble();
+        } catch (InputMismatchException e) {
+            System.err.println("Ошибка: введено не число!");
+            System.exit(0);
+        }
         System.out.println("Введите второе число: ");
-        double y = in.nextDouble();
+        double y = 0;
+                try{
+                    y = in.nextDouble();
+                } catch (InputMismatchException e){
+                    System.err.println("Ошибка: введено не число!");
+                System.exit(0);}
+
         System.out.println("Введите оператор: +, -, *, / :" );
         String o = in.next();
 
@@ -20,6 +33,8 @@ public class Main {
         System.out.println("Результат:" + answer);
 
     }
+
+
 
 }
 

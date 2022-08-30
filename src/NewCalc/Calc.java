@@ -1,10 +1,11 @@
 package NewCalc;
 
 public class Calc {
+    public static double answer;
     private double x;
     private double y;
     private String o;
-    public static double answer;
+
     public Calc(double x, double y, String o) {
         this.x = x;
         this.y = y;
@@ -12,25 +13,38 @@ public class Calc {
     }
 
     public double Calculator() {
-        switch (o) {
-            case "+":
-                Operation Plus = new Operation(x,y);
-                answer = Plus.getPlus();
-                break;
-            case "-":
-                Operation Minus = new Operation(x,y);
-                answer = Minus.getMinus();
-                break;
-            case "*": Operation Um = new Operation(x,y);
-                answer = Um.getUm();
-                break;
-            case "/": Operation Del = new Operation(x,y);
-                answer = Del.getDel();
-                break;
-
+        try {
+            switch (o) {
+                case "+":
+                    answer = x + y;
+                    break;
+                case "-":
+                    answer = x - y;
+                    break;
+                case "*":
+                    answer = x * y;
+                    break;
+                case "/":
+                    try {
+                        if (y == 0) {
+                            throw new ArithmeticException();
+                        }
+                        else
+                        answer = x / y;
+                    } catch (ArithmeticException myErr) {
+                        System.err.println("Деление на ноль недоступно");
+                        System.exit(1);
+                    }
+                    break;
+                default: throw new Exception();
+            }
+        } catch (Exception err){
+            System.err.println("Неизвестный оператор");
+            System.exit(2);
         }
-        return answer;
-    }
+
+            return answer;
+        }
 
     }
 
