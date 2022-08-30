@@ -3,49 +3,46 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
+import static java.lang.System.*;
+
 public class Collection {
     public static void main(String[] args) throws IOException {
 
         FileInputStream stream = new FileInputStream("src/Collections/testText.txt");
         int lenght = stream.available();
         byte [] data = new byte[lenght];
-        stream.read(data);
+        final int read = stream.read(data);
         String text = new String(data);
         String [] myArr = text.split(" ");
 
 
         ArrayList<String> MyArrayList = new ArrayList<>();
-        for (String words:myArr) {
-            MyArrayList.add(words);
-        }
-        System.out.println("--------------Слова в файле: ");
-        System.out.println();
-        System.out.println(MyArrayList);
-        Collections.sort(MyArrayList);
-        System.out.println();
-        System.out.println("--------------Слова в алфавитном порядке: ");
-        System.out.println();
-        System.out.println(MyArrayList);
+        Collections.addAll(MyArrayList, myArr);
+        out.println("--------------Слова в файле: ");
+        out.println();
+        out.println(MyArrayList);
+        Set<String> noDubl = new TreeSet<>(MyArrayList);
+        out.println();
+        out.println("--------------Слова в алфавитном порядке: ");
+        out.println();
+        out.println(noDubl);
 
-        Set<String> noDubl = new HashSet<String>(MyArrayList);
 
-        ArrayList<String> MyArrayList1 = new ArrayList<>();
-        for (String ewords:noDubl){
-            MyArrayList1.add(ewords);
-        }
+        ArrayList<String> MyArrayList1 = new ArrayList<>(noDubl);
         int kol;
         int max=0;
         int kolMax=0;
-        System.out.println();
-        System.out.println("--------------Слово встречается в файле: ");
-        System.out.println();
+        out.println();
+        out.println("--------------Слово встречается в файле: ");
+        out.println();
 
         for (int i=0; i<MyArrayList1.size(); i++){
+          
+
             String oneWord = MyArrayList1.get(i);
             kol=0;
-            for (int j=0; j<MyArrayList.size(); j++){
-                String dubWord = MyArrayList.get(j);
-                if(oneWord.equals(dubWord)){
+            for (String dubWord : MyArrayList) {
+                if (oneWord.equals(dubWord)) {
                     kol++;
                 }
             }
@@ -54,11 +51,11 @@ public class Collection {
                 kolMax = kol;
             }
 
-            System.out.println(oneWord + " - " + kol);
+            out.println(oneWord + " - " + kol);
         }
-        System.out.println("-----------------Чаще всего встречается:");
-        System.out.println();
-        System.out.println(MyArrayList1.get(max) + " - "+ kolMax);
+        out.println("-----------------Чаще всего встречается:");
+        out.println();
+        out.println(MyArrayList1.get(max) + " - "+ kolMax);
     }
     }
 
